@@ -1,0 +1,7 @@
+.inputFilter {
+  display: block;
+  margin: 0 auto;
+  padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
