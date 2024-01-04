@@ -8,13 +8,15 @@ const initializeApp = async () => {
   try {
     const store = await createStoreWithPreloadedState();
 
-    ReactDOM.render(
+    const rootElement = document.getElementById('root');
+    const root = ReactDOM.createRoot(rootElement);
+
+    root.render(
       <React.StrictMode>
         <Provider store={store}>
           <App />
         </Provider>
-      </React.StrictMode>,
-      document.getElementById('root')
+      </React.StrictMode>
     );
   } catch (error) {
     console.error('Error while initializing the app:', error);
