@@ -1,26 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import createStoreWithPreloadedState from './redux/store';
-import App from './components/App';
+import { App } from './components/App';
 
-const initializeApp = async () => {
-  try {
-    const store = await createStoreWithPreloadedState();
+import { store } from './redux/store';
 
-    const rootElement = document.getElementById('root');
-    const root = ReactDOM.createRoot(rootElement);
+const rootElement = document.getElementById('root');
+const root = createRoot(rootElement);
 
-    root.render(
-      <React.StrictMode>
-        <Provider store={store}>
-          <App />
-        </Provider>
-      </React.StrictMode>
-    );
-  } catch (error) {
-    console.error('Error while initializing the app:', error);
-  }
-};
-
-initializeApp();
+root.render(
+  <Provider store={store}>
+    <App />
+  </Provider>
+);

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setContacts } from '../redux/actions';
+import { fetchContacts } from '../redux/actions';
 
 const useLocalStorage = key => {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const useLocalStorage = key => {
         if (JSON.stringify(parsedContacts) !== JSON.stringify(storedContacts)) {
           localStorage.setItem(key, JSON.stringify(storedContacts));
         }
-        dispatch(setContacts(parsedContacts));
+        dispatch(fetchContacts(parsedContacts));
       }
     } catch (error) {
       console.log(error);

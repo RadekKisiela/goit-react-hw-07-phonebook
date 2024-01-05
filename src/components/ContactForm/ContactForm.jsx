@@ -10,7 +10,6 @@ const ContactForm = ({ addContact }) => {
   const [numberError, setNumberError] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
-  // Funkcja do walidacji pola imienia
   const validateName = () => {
     if (!name.trim()) {
       setNameError('Name is required');
@@ -23,7 +22,6 @@ const ContactForm = ({ addContact }) => {
     }
   };
 
-  // Funkcja do walidacji pola numeru telefonu
   const validateNumber = () => {
     if (!number.trim()) {
       setNumberError('Phone number is required');
@@ -42,11 +40,9 @@ const ContactForm = ({ addContact }) => {
     e.preventDefault();
     setSubmitted(true);
 
-    // Walidacja przed dodaniem kontaktu
     validateName();
     validateNumber();
 
-    // Sprawdź, czy są błędy walidacji przed dodaniem kontaktu
     if (!nameError && !numberError) {
       const contact = {
         id: nanoid(),
