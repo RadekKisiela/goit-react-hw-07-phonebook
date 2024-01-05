@@ -1,8 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
 import { fetchContacts, addContact, deleteContact } from './actions';
-
-axios.defaults.baseURL = 'https://65967fcf6bb4ec36ca02c178.mockapi.io';
 
 const contactsSlice = createSlice({
   name: 'contacts',
