@@ -5,6 +5,8 @@ import { setFilter } from '../redux/filterReducer';
 import ContactForm from './ContactForm/ContactForm';
 import ContactList from './ContactList/ContactList';
 import Filter from './Filter/Filter';
+import { useEffect } from 'react';
+import { fetchContacts } from '../redux/actions';
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -24,6 +26,10 @@ export const App = () => {
     dispatch(setFilter(value));
   };
 
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
   return (
     <div
       style={{
@@ -40,7 +46,14 @@ export const App = () => {
       <ContactForm addContact={addContactHandler} />
       <h2>Contacts</h2>
       <Filter filter={filter} onChangeFilter={setFilterHandler} />
-      <ContactList contacts={contacts} onDeleteContact={deleteContactHandler} />
+      {Array.isArray(contacts) ? (
+        <ContactList
+          contacts={contacts}
+          onDeleteContact={deleteContactHandler}
+        />
+      ) : (
+        <p>Contacts not found</p>
+      )}
     </div>
   );
 };

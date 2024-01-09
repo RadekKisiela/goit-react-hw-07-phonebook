@@ -4,10 +4,10 @@ import css from './ContactForm.module.css';
 import PropTypes from 'prop-types';
 
 const ContactForm = ({ addContact }) => {
-  const [formData, setFormData] = useState({ name: '', number: '' });
-  const { name, number } = formData;
+  const [formData, setFormData] = useState({ name: '', phone: '' });
+  const { name, phone } = formData;
   const [nameError, setNameError] = useState('');
-  const [numberError, setNumberError] = useState('');
+  const [phoneError, setPhoneError] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
   const validateName = () => {
@@ -22,17 +22,17 @@ const ContactForm = ({ addContact }) => {
     }
   };
 
-  const validateNumber = () => {
-    if (!number.trim()) {
-      setNumberError('Phone number is required');
+  const validatePhone = () => {
+    if (!phone.trim()) {
+      setPhoneError('Phone number is required');
     } else if (
       !/^\+?\d{1,4}?\s?\(?\d{1,4}?\)?\s?\d{1,4}\s?\d{1,4}\s?\d{1,9}$/.test(
-        number
+        phone
       )
     ) {
-      setNumberError('Invalid phone number format');
+      setPhoneError('Invalid phone number format');
     } else {
-      setNumberError('');
+      setPhoneError('');
     }
   };
 
@@ -41,19 +41,19 @@ const ContactForm = ({ addContact }) => {
     setSubmitted(true);
 
     validateName();
-    validateNumber();
+    validatePhone();
 
-    if (!nameError && !numberError) {
+    if (!nameError && !phoneError) {
       const contact = {
         id: nanoid(),
         name,
-        number,
+        phone,
       };
 
       addContact(contact);
       setFormData({
         name: '',
-        number: '',
+        phone: '',
       });
     }
   };
@@ -82,15 +82,15 @@ const ContactForm = ({ addContact }) => {
       <input
         className={css.inputField}
         type="tel"
-        id="number"
-        name="number"
+        id="phone"
+        name="phone"
         pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
         title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
         required
-        value={number}
+        value={phone}
         onChange={handleChange}
       />
-      {submitted && numberError && <p className={css.error}>{numberError}</p>}
+      {submitted && phoneError && <p className={css.error}>{phoneError}</p>}
       <button className={css.btn} type="submit">
         Add Number
       </button>

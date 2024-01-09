@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import css from './ContactList.module.css';
 
 const ContactItem = ({ contact, onDeleteContact }) => {
+  console.log('Received contact in ContactItem:', contact);
   return (
     <li>
       <p>
@@ -25,19 +26,16 @@ ContactItem.propTypes = {
 };
 
 const ContactList = ({ contacts, onDeleteContact }) => {
+  console.log('Received contacts:', contacts);
   return (
     <ul>
-      {Array.isArray(contacts) ? (
-        contacts.map(contact => (
-          <ContactItem
-            key={contact.id}
-            contact={contact}
-            onDeleteContact={onDeleteContact}
-          />
-        ))
-      ) : (
-        <p>No contacts available.</p>
-      )}
+      {contacts.map(contact => (
+        <ContactItem
+          key={contact.id}
+          contact={contact}
+          onDeleteContact={onDeleteContact}
+        />
+      ))}
     </ul>
   );
 };
