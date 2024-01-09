@@ -27,13 +27,17 @@ ContactItem.propTypes = {
 const ContactList = ({ contacts, onDeleteContact }) => {
   return (
     <ul>
-      {contacts.map(contact => (
-        <ContactItem
-          key={contact.id}
-          contact={contact}
-          onDeleteContact={onDeleteContact}
-        />
-      ))}
+      {Array.isArray(contacts) ? (
+        contacts.map(contact => (
+          <ContactItem
+            key={contact.id}
+            contact={contact}
+            onDeleteContact={onDeleteContact}
+          />
+        ))
+      ) : (
+        <p>No contacts available.</p>
+      )}
     </ul>
   );
 };

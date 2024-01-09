@@ -40,14 +40,7 @@ export const App = () => {
       <ContactForm addContact={addContactHandler} />
       <h2>Contacts</h2>
       <Filter filter={filter} onChangeFilter={setFilterHandler} />
-      {contacts ? (
-        <ContactList
-          contacts={contacts}
-          onDeleteContact={deleteContactHandler}
-        />
-      ) : (
-        <p>Loading contacts...</p>
-      )}
+      <ContactList contacts={contacts} onDeleteContact={deleteContactHandler} />
     </div>
   );
 };
