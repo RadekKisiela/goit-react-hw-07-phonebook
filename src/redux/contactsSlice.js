@@ -3,13 +3,11 @@ import { fetchContacts, addContact, deleteContact } from './actions';
 
 const contactsSlice = createSlice({
   name: 'contacts',
-  initialState: [
-    {
-      contacts: [],
-      isLoading: false,
-      error: null,
-    },
-  ],
+  initialState: {
+    contacts: [],
+    isLoading: false,
+    error: null,
+  },
 
   extraReducers: builder => {
     builder
