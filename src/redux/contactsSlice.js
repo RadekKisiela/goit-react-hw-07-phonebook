@@ -3,7 +3,14 @@ import { fetchContacts, addContact, deleteContact } from './actions';
 
 const contactsSlice = createSlice({
   name: 'contacts',
-  initialState: [],
+  initialState: [
+    {
+      contacts: [],
+      isLoading: false,
+      error: null,
+    },
+  ],
+
   extraReducers: builder => {
     builder
       .addCase(fetchContacts.pending, state => {
@@ -26,7 +33,7 @@ const contactsSlice = createSlice({
       })
       .addCase(addContact.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload;
+        state.error = action.error.message;
       })
       .addCase(deleteContact.pending, state => {
         state.isLoading = true;
@@ -38,7 +45,7 @@ const contactsSlice = createSlice({
       })
       .addCase(deleteContact.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload;
+        state.error = action.error.message;
       });
   },
 });

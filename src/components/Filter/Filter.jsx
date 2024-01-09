@@ -1,24 +1,31 @@
 import React from 'react';
-import css from './Filter.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { setFilter } from '../../redux/filterReducer';
 import PropTypes from 'prop-types';
+import css from './Filter.module.css';
 
 const Filter = ({ filter, onChangeFilter }) => {
-  const handleChange = e => {
-    const value = e.target.value;
-    onChangeFilter(typeof value === 'string' ? value : '');
+  const dispatch = useDispatch();
+  const filterValue = useSelector(state => state.filter.filterValue);
+
+  const handleInputChange = event => {
+    const inputValue = event.target.value;
+    dispatch(setFilter(inputValue));
   };
 
   return (
-    <label>
-      Find contact by name
-      <input
-        className={css.inputFilter}
-        type="text"
-        value={filter}
-        onChange={handleChange}
-        placeholder="Search contact"
-      />
-    </label>
+    <div>
+      <label>
+        Find contact by name
+        <input
+          className={css.inputFilter}
+          type="text"
+          value={filterValue}
+          onChange={handleInputChange}
+          placeholder="Search..."
+        />
+      </label>
+    </div>
   );
 };
 

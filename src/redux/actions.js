@@ -1,4 +1,4 @@
-import { createAsyncThunk, createAction } from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 axios.defaults.baseURL = 'https://65967fcf6bb4ec36ca02c178.mockapi.io/';
@@ -37,6 +37,3 @@ export const deleteContact = createAsyncThunk(
     }
   }
 );
-export const setFilter = createAction('filter/setFilter', value => ({
-  payload: typeof value === 'string' ? value : '',
-}));
